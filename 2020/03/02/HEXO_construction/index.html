@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>我的HEXO搭建过程 | A Useless Space.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Lin H">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.0.0',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "black-grey",
+	     });
+	}); 
+	</script>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover_3.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/avatar_2.jpg"></a></div>
+    <span>2020-03-02</span>
+    <h2>我的HEXO搭建过程</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/hexo/" rel="tag">hexo</a></div>
+    <div class="social-links">
+<a href="https://github.com/dudulumashiro" target="_blank"><i class="fa fa-github fa-fw"></i></a><a href="mailto:bismarck@mail.xjtu.edu.cn"><i class="fa fa-envelope fa-fw"></i></a><a href="https://weibo.com/3960042925/" target="_blank"><i class="fa fa-weibo fa-fw"></i></a>
+</div></div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <h2 id="前言">前言</h2>
+<p>这里主要说一说我的HEXO博客是怎么搭起来的。</p>
+<a id="more"></a>
+<p>其实主要就是到处引用了各家的经验，东拼西凑弄出了一个自己感觉还可以的玩意。在其间也遇到了一些问题，用自己几乎忘得精光的前端知识和百度解决了一部分问题。剩下的就那么地吧，也许在学习的过程中可以慢慢解决。搭这个博客的过程就像当年在玩MC的时候费尽千辛万苦收集材料造一个自以为豪华但实际破破烂烂的小家一样，不过最后的成就感还是让我满足的。😆</p>
+<h2 id></h2>
+<p><img src="/2020/03/02/HEXO_construction/psb.jpg" alt><br>
+上面是我建于2014年8月的破房。下面正式进入正题啦~</p>
+<h2 id="创建">创建</h2>
+<p>这一步其实没啥说的，我是照着人家的教程搭起来的，过程也十分简单，不过得先有个<a href="https://github.com" target="_blank" rel="noopener">Github</a>账号哦。</p>
+<div class="note info">
+            <p>教程地址：<a href="https://blog.csdn.net/sinat_37781304/article/details/82729029" target="_blank" rel="noopener">https://blog.csdn.net/sinat_37781304/article/details/82729029</a></p>
+          </div>
+<p>操作到第6步就可以拥有一个自己的博客啦！第7步可以先跳过，等到完全搭建完成了再去购买自己的域名。<br>
+这里在第3步安装npm时有可能会遇到安装巨慢的情况，请参考下面来解决：</p>
+<div class="note info">
+            <p>更换npm镜像源：<a href="https://www.cnblogs.com/nicest/p/9577310.html" target="_blank" rel="noopener">https://www.cnblogs.com/nicest/p/9577310.html</a></p>
+          </div>
+<h2 id="主题">主题</h2>
+<p>其实默认的主题也是不错的，但是我就喜欢追求一些花里胡哨的东西（来掩盖我写文章水平很低），所以我们可以更换其他大佬制作的主题。在这里就可以尽情挑选啦。</p>
+<div class="note info">
+            <p>主题：<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
+          </div>
+<p>安装过程详见教程地址的第二部分第二节。<br>
+当然若是你想自己制作主题，只要你拥有足够的前端知识，请进入这里：</p>
+<div class="note info">
+            <p>主题开发1：<a href="https://www.cnblogs.com/yyhh/p/11058985.html" target="_blank" rel="noopener">https://www.cnblogs.com/yyhh/p/11058985.html</a><br>主题开发2：<a href="https://molunerfinn.com/make-a-hexo-theme/#%E5%89%8D%E8%A8%80" target="_blank" rel="noopener">https://molunerfinn.com/make-a-hexo-theme/#前言</a></p>
+          </div>
+<h2 id="个性化">个性化</h2>
+<p>在修改了主题之后就可以对其进行一些个性化操作了，像修改名字和主页信息之类的操作步骤，一般都会在你所安装的主题的作者的页面中找到，其中也会有作者在制作TA的主题时设计的一些个性化装饰的代码实现方法，比如我所选择的这个主题的作者所提供的文档如下：</p>
+<div class="note info">
+            <p>LX主题文档：<a href="https://lx.blleng.cn/190607/" target="_blank" rel="noopener">https://lx.blleng.cn/190607/</a></p>
+          </div>
+<p>目前最多人使用的主题大概是NexT主题，这个主题风格非常简洁大方，而且因为所用的人多，其衍生出来的各种针对NexT主题的个性化操作都可以在网上搜到教程，所以如果从该主题起步会比较简单。</p>
+<h2 id="-v2"></h2>
+<p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1582999422099&amp;di=735bf8eac4bd932874bebdc44e285d53&amp;imgtype=0&amp;src=http%3A%2F%2Fwx1.sinaimg.cn%2Flarge%2F006bYVyvgy1fs56g99jzkj30z00hrgqt.jpg" alt="NexT"><br>
+当然，博客的主要内容应该是文章啦！不过我接下来还是会介绍一些我添加的花里胡哨的东西或是一些小技巧。（<strong><font color="red">持续更新哦</font></strong>）</p>
+<h3 id="1-网易云外链播放器">1.网易云外链播放器</h3>
+<p>这是网易云自己提供的功能哦，所以可以适用于各种网页（大概吧）。添加播放器的教程如下：</p>
+<div class="note info">
+            <p>网易云外链：<a href="https://yelog.org/2019/10/08/3-hexo-add-music/" target="_blank" rel="noopener">https://yelog.org/2019/10/08/3-hexo-add-music/</a></p>
+          </div>
+<p>整体按教程走是没问题的，其效果是在你的博客的所有页面的右下角添加了一个播放器。但是这样并不适合我的博客的布局，而且我不希望在访客打开文章的时候也会自动播放音乐，所以我捣鼓了半天，把它变成了只在主页自动播放，且位于页面左下角。<br>
+整体过程与教程一致，不同主要在于，将他提供的的代码改为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"position:fixed; bottom: 0; left: 0;"</span>&gt;</span><br><span class="line">&lt;iframe frameborder=<span class="string">"no"</span> border=<span class="string">"0"</span> marginwidth=<span class="string">"0"</span> marginheight=<span class="string">"0"</span> width=330 height=86 src=<span class="string">"//music.163.com/outchain/player?type=2&amp;id=410925920&amp;auto=1&amp;height=66"</span>&gt;&lt;/iframe&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>其中fixed表示相对于浏览器窗口进行定位，后面的bottom和left即相对位置，具体可参考css代码教程。<br>
+然后将其放置在你的主题文件夹下的<font color="red"> layout/index.ejs </font>的代码中，而不是最后，我是放在倒数第三个div内。然后就可以看到如我主页的那种效果啦。</p>
+<h3 id="2-加密文章">2.加密文章</h3>
+<p>这个东西也许是最没用的东西了吧😂。虽然对于大佬来说可以以此有偿共享一些高级技术，但是对我来说大概就只是一个废纸篓，让我可以把一些不开心的情绪放进去，但又不影响到别人，不过也可以放一些珍贵的回忆，只让重要的人看到。这么一说又好像有点感觉😂。。。。<br>
+又自说自话了，下面进入正题吧。<br>
+这里主要是采用了下面的教程：</p>
+<div class="note info">
+            <p>加密文章：<a href="https://www.jianshu.com/p/44e211829447" target="_blank" rel="noopener">https://www.jianshu.com/p/44e211829447</a></p>
+          </div>
+<p>这里的加密貌似在同一个终端上解密后，只要没有清除历史记录那么再次访问的时候就无需再次解密。</p>
+<h3 id="3-便捷插入图片">3.便捷插入图片</h3>
+<p>教程在这啦~非常简单方便哦。</p>
+<div class="note info">
+            <p>插入图片的插件：<a href="https://github.com/boboidream/hexo-easy-images" target="_blank" rel="noopener">https://github.com/boboidream/hexo-easy-images</a></p>
+          </div>
+<h3 id="4-加入emoij表情">4.加入emoij表情</h3>
+<p>这里主要是采用了下面的教程：</p>
+<div class="note info">
+            <p>在HEXO中插入emoij：<a href="https://blog.csdn.net/weixin_41287260/article/details/103050545" target="_blank" rel="noopener">https://blog.csdn.net/weixin_41287260/article/details/103050545</a></p>
+          </div>
+<p>在按着教程走完之后，只需要进入<a href="https://www.webfx.com/tools/emoji-cheat-sheet/" target="_blank" rel="noopener">这里</a>，就可以查看不同的emoij对应的代码了。虽然实际上长得有点不一样，但还是够用了吧😆。</p>
+<h3 id="5-在主页显示摘要">5.在主页显示摘要</h3>
+<p>教程在此，推荐第一种方法哦。</p>
+<div class="note info">
+            <p>主页显示摘要：<a href="https://www.jianshu.com/p/78c218f9d1e7" target="_blank" rel="noopener">https://www.jianshu.com/p/78c218f9d1e7</a></p>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_4.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>没有更新的文章</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_3.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2020/02/22/encryption(full)/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>从新开始。(完...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">A Useless Space.</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
+  </div>
+</footer>
+
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/avatar_2.jpg" alt="Lin H"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Lin H</p>
+          <span class="tagline">无趣的灵魂。</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://weibo.com/3960042925/" target="_blank">Weibo</a></li>
+        <li> <a href="https://space.bilibili.com/2684353" target="_blank">bilibili</a></li>
+        <li> <a href="https://huaban.com/l3dviccrcpp/" target="_blank">花瓣</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
