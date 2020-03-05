@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>OFDM | A Useless Space.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Lin H">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.0.0',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "black-grey",
+	     });
+	}); 
+	</script>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover_3.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/avatar_2.jpg"></a></div>
+    <span>2020-03-03</span>
+    <h2>OFDM</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/wireless-comunication/" rel="tag">wireless comunication</a></div>
+    <div class="social-links">
+<a href="https://github.com/dudulumashiro" target="_blank"><i class="fa fa-github fa-fw"></i></a><a href="mailto:bismarck@mail.xjtu.edu.cn"><i class="fa fa-envelope fa-fw"></i></a><a href="https://weibo.com/3960042925/" target="_blank"><i class="fa fa-weibo fa-fw"></i></a>
+</div></div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p>因为预感正在上的一门课可能要用到这个玩意，而且自己的研究方向说不定也要用到，所以最近花了点（大量！）时间去研究OFDM这个玩意，然后发现这玩意真的很<mark>淦</mark>啊！需要融汇贯通信号与系统、通信原理、无线通信、信息论等一系列知识才能弄懂一点。所以在这里我也没想讲清楚这个东西，也就是想写篇文章帮助我捋顺OFDM的实现过程。非通信专业的可以右上角了，以我的水平必不可能让你们弄懂。通信专业的嘛，也许可以进来copy个代码。</p>
+<h3 id="首先，什么是OFDM？它能用来干嘛用？">首先，什么是OFDM？它能用来干嘛用？</h3>
+<p>OFDM是一种多载波的传输方法，它将频带划分为多个子信道并行传输数据，将高速数据流分成多个并行的低速数据流，然后调制到每个信道的子载波上进行传输。由于它将非平坦衰落无线信道转化成多个正交平坦衰落的子信道，从而可消除信道波形间的干扰，达到对抗多径衰落的目的。<br>
+正交频分复用（OFDM）是对多载波调制（MCM）的一种改进，在。它的特点是：各子载波相互正交，所以扩频调制后的频谱可以相互重叠，不但减少了子载波间的相互干扰，还大大提高了频谱利用率。<br>
+选择OFDM的一个很大的原因是该系统能够很好的对抗频率选择性衰落和窄带干扰。在单载波系统中，一次衰落或者干扰会导致整个链路失效，但是在多载波系统中，某一时刻只会有少部分的子信道受到深衰落的影响。<br>
+至于为什么子载波间正交，什么是正交，可以参看下面的文章，其中也解释了，为什么OFDM达到了理想信道的频带利用率：</p>
+<div class="note info">
+            <p><a href="https://blog.csdn.net/wordwarwordwar/article/details/79605916" target="_blank" rel="noopener">给&quot;小白&quot;图示讲解OFDM的原理</a></p>
+          </div>
+<p>仅针对OFDM，掌握这个公式是最主要的:<br>
+$$f(t)= \sum a_k \cdot sin(2\pi \Delta f \cdot kt)+ \sum b_k \cdot cos(2\pi \Delta f \cdot kt)= \sum F_k \cdot exp(j \cdot 2\pi \Delta f \cdot kt)$$<br>
+此处的F<sub>k</sub>就是你所要发送的信息，它被调制在了子载波上发送出去。<br>
+显而易见，这是傅里叶级数的表达形式，如果将t离散化，就是离散傅里叶变换。这也说明，OFDM可以通过FFT和IFFT来实现。<br>
+来源：<a href="https://zhuanlan.zhihu.com/p/57967971" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/57967971</a><br>
+上面的网页中简要地用文字叙述了整个OFDM的过程，接下来的内容主要讲解答主所写的代码。先把代码贴上，然后挨个看下去。<br>
+讲解的顺序大概是这样的：<ul></ul></p>
+<li>1.参数设置</li>
+<li>2.信道编码<ul>
+<li>卷积码</li>
+<li>交织编码</li>
+</ul>
+</li>
+<li>3.调制</li>
+<li>4.扩频</li>
+<li>5.插入导频</li>
+<li>其他</li>
+<p>在写代码之前，我一般会明确，哪些是我已知的或是需要我自行设置的条件，而哪些是我可能得到的结果，然后就是我通过何种方法得到这个结果。<br>
+1.前提条件<br>
+首先需要确定的是OFDM的子载波数，这里涉及两个概念：<strong>带宽</strong>和<strong>OFDM symbol</strong>的长度，而总的子载波个数=带宽*OFDM symbol长度。</p>
+<h3 id="带宽">带宽</h3>
+<p>带宽指的是能够有效通过该信道的信号的最大频带宽度，根据香农定理，信道容量与带宽直接挂钩，而传输速率最高不超过信道容量，所以带宽也影响速率。当然，带宽资源是有限的，所以需要分配，这就要根据802.11各种版本的协议中所定的来使用。</p>
+<p>为什么要分直流子载波。实际上并不使用该载波，及在该载波上传送的信息为0。关于为什么，我查阅了一些资料，也没太看懂，我只能理解为是直流（低频）信号容易受到干扰，会导致直流子载波的接收信噪比会比其他子载波的接收信噪比低很多吧。对于这一点希望能有大佬解惑，我查到的一些资料也就放在下面了：<br>
+<a href="http://www.mweda.com/mwqa-11073-1.html" target="_blank" rel="noopener">http://www.mweda.com/mwqa-11073-1.html</a><br>
+<a href="https://blog.csdn.net/rs_network/article/details/50666297" target="_blank" rel="noopener">https://blog.csdn.net/rs_network/article/details/50666297</a></p>
+<h3 id="OFDM-symbol">OFDM symbol</h3>
+<p>OFDM symbol的长度也就是采样长度，一个OFDM符号的一般包括IFFT/FFT的点数+循环CP的长度，其结构如下图：<br>
+根据802.11协议规定，20M带宽的OFDM的symbol长度为3.2μs，根据上面的计算公式，子载波个数为64个，但实际工作的子载波数为52个，其中48个传输数据，4个插入导频，1个不工作的DC子载波，剩余的子载波分布在前后作为保护间隔。而为了消除ISI，还会在这些子载波前加入循环CP前缀，这就最终组成了一个完整的OFDM symbol。</p>
+<p>参考：<br>
+1.<a href="https://www.zhihu.com/question/336248612" target="_blank" rel="noopener">OFDM子载波数量是怎样确定的？</a><br>
+2.<a href="https://blog.csdn.net/rs_network/article/details/49162455?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task" target="_blank" rel="noopener">https://blog.csdn.net/rs_network/article/details/49162455?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task</a></p>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_4.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>没有更新的文章</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_3.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2020/03/02/HEXO_construction/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>我的HEXO搭...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+<div class="comment"><div id="comments"></div></div>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">A Useless Space.</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
+  </div>
+</footer>
+
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/avatar_2.jpg" alt="Lin H"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Lin H</p>
+          <span class="tagline">无趣的灵魂。</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://weibo.com/3960042925/" target="_blank">Weibo</a></li>
+        <li> <a href="https://space.bilibili.com/2684353" target="_blank">bilibili</a></li>
+        <li> <a href="https://huaban.com/l3dviccrcpp/" target="_blank">花瓣</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="//unpkg.com/valine"></script>
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: '此处留言',
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+  TeX: {
+          extensions: ["mhchem.js"]
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.5/latest.js?config=TeX-MML-AM_SVG"></script>
+</body>
+</html>
