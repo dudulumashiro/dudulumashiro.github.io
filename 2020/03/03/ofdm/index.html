@@ -37,15 +37,16 @@
 	     });
 	}); 
 	</script>
-  <!--Google_Analytics-->
-<script async src="https://www.googletagmanager.com/gtag/js?id=true"></script>
+  <!--baidu_analytics-->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'true');
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?true";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
 </script>
-
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
 <meta name="generator" content="Hexo 4.2.0"></head>
@@ -211,8 +212,8 @@ $$f(t)= \sum a_k \cdot sin(2\pi \Delta f \cdot kt)+ \sum b_k \cdot cos(2\pi \Del
     el: '#comments',
     verify: false,
     notify: false,
-    appId: '',
-    appKey: '',
+    appId: 'cA3CuzHaoC6y8uv1dvxI3d2y-gzGzoHsz',
+    appKey: 'rDjmnJugKz9cQOMC7A0jaP8N',
     placeholder: '此处留言',
     avatar: 'identicon',
     meta: guest,
