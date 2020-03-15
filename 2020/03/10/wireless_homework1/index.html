@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>无线通信课程作业（一） | A Useless Space.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Lin H">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.0.0',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "black-grey",
+	     });
+	}); 
+	</script>
+  <!--baidu_analytics-->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?14512748";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover_3.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/avatar_2.jpg"></a></div>
+    <span>2020-03-10</span>
+    <h2>无线通信课程作业（一）</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/homework/" rel="tag">homework</a> <i class="fa fa-tag"></i><a class="tag-link" href="/tags/wireless-comunication/" rel="tag">wireless comunication</a></div>
+    <div class="social-links">
+<a href="https://github.com/dudulumashiro" target="_blank"><i class="fa fa-github fa-fw"></i></a><a href="mailto:bismarck@mail.xjtu.edu.cn"><i class="fa fa-envelope fa-fw"></i></a><a href="https://weibo.com/3960042925/" target="_blank"><i class="fa fa-weibo fa-fw"></i></a>
+</div></div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p>划了几天水的无线通信，突然布置作业了！<br>
+我熟练地打开浏览器，开始寻找实验报告。<br>
+没有。。。。。。<br>
+那就只能自己动手，丰衣足食了。<br><br>
+首先明确目标：</p>
+<div class="note info">
+            <p>根据Goldsmith书中信道容量的内容画出<strong><font color="#F33B45">对数正态分布、瑞利衰落、Nakagami衰落</font></strong>下确定的容量随平均接收信噪比变化的曲线。（如图1，2，3）</p>
+          </div>
+<p>给出答案的实验我最喜欢了，实在不行建个数组直接plot嘛😎。<br>
+进入正题。</p>
+<h2 id="知识整理">知识整理</h2>
+<h3 id="strong-快衰落-Fast-Fading-strong"><strong>快衰落(Fast Fading)</strong></h3>
+<p>移动台附近的散射体（地形，地物和移动体等）引起的多径传播信号在接收点相叠加，造成接收信号快速起伏的现象。主要由于多径传播而产生的衰落，由于移动体周围有许多散射、反射和折射体，引起信号的多径传输，使到达的信号之间相互叠加，其合成信号幅度表现为快速的起伏变化，其变化率比慢衰落快。<br>
+快衰落一般服从瑞利（Rayleigh）分布、莱斯（Rice）分布或纳卡迦米（Nakagami）分布。此外，在很多场景下，快衰落在不同的时间、不同的频率和不同的空间上表现出不同的特性，因此又可细分为时间选择性快衰落、频率选择性快衰落和空间选择性快衰落。</p>
+<h3 id="strong-慢衰落-Slow-Fading-strong"><strong>慢衰落(Slow Fading)</strong></h3>
+<p>由于移动台的不断运动，电波传播路径地形地貌是不断变化的，因而局部中值也是不断变化的．这种变化所造成的衰落比多径效应引起的快衰落要慢得多，称为慢衰落。慢衰落是由大气折射、大气湍流、大气层结等平均大气条件的变化而引起的，通常与频率的关系不大，而主要与气象条件、电路长度、地形等因素有关。慢衰落一般服从对数正态分布。<br>
+<img src="https://iknow-pic.cdn.bcebos.com/30adcbef76094b363f20fa50adcc7cd98c109dd9?x-bce-process=image/resize,m_lfit,w_600,h_800,limit_1" alt="衰落"><br>
+上图即为快、慢衰落的区别。<br><br>
+在引入容量的定义前，要先说明要计算信道容量所需要的信息。这里引用Goldsmith书中的内容：</p>
+<div class="note info">
+            <h3 id="《wireless-communications》–Goldsmith-page-102">《wireless communications》–Goldsmith. page-102.</h3><p>The capacity of this channel depends on what is known about <i>g[i]</i> at the transmitter and receiver. We will consider three different scenarios regarding this knowledge as follows.<br>1.<i>Channel distribution information (CDI): </i>The distribution of <i>g[i]</i> is known to the transmitter and receiver.<br>2.<i>Receiver CSI: </i>The value of <i>g[i]</i> is known to the receiver at time <i>i</i>, and both the transmitter and receiver know the distribution of <i>g[i]</i>.<br>3.<i>Transmitter and receiver CSI: </i>The value of <i>g[i]</i> is known to the transmitter and receiver at time <i>i</i>, and both the transmitter and receiver know the distribution of <i>g[i]</i>.<br><br>(此处，<i>g[i]</i>为信道增益（也称为信道状态信息），它在码字发送的过程中是变化的。)<br>这里的信道容量取决于接收机和发射机对<i>g[i]</i>了解多少，这里将分为以下三种情况讨论。<br>1.接收机和发射机都知道<i>g[i]</i>的分布。<br>2.接收机和发射机都知道<i>g[i]</i>的分布，且接收机知道时刻<i>i</i>的<i>g[i]</i>。<br>3.接收机和发射机都知道<i>g[i]</i>的分布和时刻<i>i</i>的<i>g[i]</i>。</p>
+          </div>
+<p>这里的信道模型是这样的：<br>
+<img src="/2020/03/10/wireless_homework1/1.PNG" alt></p>
+<h3 id="strong-AWGN信道容量-strong"><strong>AWGN信道容量</strong></h3>
+<p>AWGN信道的容量应该不需要我过多描述，咱通信学子都应该清楚，不过必须注意，这个信道容量仅在AWGN信道下成立：<br>
+$$C=B\log_2 (1+\gamma)$$<br>
+$B$为信道带宽，接收信号功率为$P$，接收信噪比为$\gamma=P/N_0$，$N_0/2$为噪声的功率谱密度。<br>
+香农同时证明了信道容量等于所有可能的输入分布下的最大互信息：<br>
+$$C=\max_{p(x)} I(X;Y)=\max_{p(x)} \sum_{x,y} p(x,y)\log(\frac{p(x,y)}{p(x)p(y)})$$<br>
+对于上面所说的第一种情况(CDI)，Goldsmith书中说其关于上式不易解，所以在这里就不涉及了。</p>
+<h3 id="strong-香农容量-Shannon-Capacity-strong"><strong>香农容量(Shannon Capacity)</strong></h3>
+<p>香农容量又称各态历经容量(ergodic capacity)，指随机信道在所有衰落状态下的最大信息速率的时间平均。在情况2下，公式如下：<br>
+$$C= \int_0^\infty B\log_2 (1+\gamma)p(\gamma)\mathrm{d}\gamma$$<br>
+$p(\gamma)$为信噪比SNR的分布概率。这个公式中容量$C$等于信噪比为$\gamma$的AWGN信道的香农容量在$\gamma$的分布上平均，所以该公式也被称为各态历经容量。由于发射机不知道瞬时信噪比$\gamma[i]$，所以只能以固定的速率发送信息。且码长需要足够长以遍历可能的衰落信道，这会造成一定的时延。<br>
+根据Jensen不等式：<br>
+$$\boldsymbol{E}[B\log_2 (1+\gamma)]=\int B\log_2 (1+\gamma)p(\gamma)\mathrm{d}\gamma\leq B\log_2 (1+\boldsymbol{E}[\gamma])=B\log_2 (1+\overline{\gamma})$$<br>
+其中 $\overline{\gamma}$ 为平均SNR，这表明，接收机已知CSI的衰落信道容量小于有着相同信噪比的AWGN信道。<br>
+现在考虑第3种情况，在这种情况下，系统模型为下图：<br>
+此时先不进行功率分配，平均接收SNR为$\gamma$的AWGN信道容量为$C_\gamma=B\log_2 (1+\gamma)$。令$p(\gamma)=p(\gamma[i]=\gamma)$为接收信噪比的分布，则信道容量按下式计算：</p>
+<p>$$C= \int_0^\infty C_\gamma p(\gamma)\mathrm{d}\gamma =\int_0^\infty B\log_2 (1+\gamma)p(\gamma)\mathrm{d}\gamma$$</p>
+<p>可以看到，不进行功率分配时的香农信道容量与情况2是一样的。<br>
+下面考虑进行功率分配。我们允许发送功率$P(\gamma)$在平均功率约束$\overline{P}$下随着$\gamma$变化：</p>
+<p>$$\int_0^\infty P(\gamma)p(\gamma)\mathrm{d}\gamma \leq \overline{P}$$</p>
+<p>于是我们定义平均功率约束下的衰落信道容量如下：</p>
+<p>$$C=\max_{P(\gamma): \int P(\gamma)p(\gamma)\mathrm{d}\gamma =\overline{P}} \int_0^\infty B\log_2 (1+\frac{P(\gamma)\gamma}{\overline{P}})p(\gamma)\mathrm{d}\gamma$$</p>
+<p>通过Lagrange乘数法即可求解出最佳的功率调整公式如下：<br>
+$$\frac{P(\gamma)}{\overline{P}}=\begin{cases} 1/\gamma_0 -1/\gamma &amp; \gamma\ge\gamma_0\\0 &amp; \gamma&lt;\gamma_0 \end{cases} $$<br>
+至于求解的具体过程可以参看Goldsmith原书，在这敲公式还是很累的。<br>
+将其代入上面的方程可得最佳功率约束下的信道容量：</p>
+<p>$$ C=\int_{\gamma_0}^\infty B\log_2(\frac{\gamma}{\gamma_0})p(\gamma)\mathrm{d}\gamma $$</p>
+<p>此即时域的注水法功控，通过设定中断门限$\gamma_0$，当信道状态好（信噪比高于$\gamma_0$）时使用信道，而且信道越好分配越多功率；当信道状态不好（信噪比低于$\gamma_0$）时不使用信道，即不给其分配功率。经过功率控制后，香农容量有可能超过AWGN信道容量。<br>
+香农信道容量只适用于快衰落信道，因为快衰落信道的相干时间较短，信道编码块的长度历经了多个相干时间，发送的码字在快衰落信道能够快速遍历所有衰落状态；而对于慢衰落信道，信道编码块的长度远远小于相干时间，因此信道容量被认为是一个取决于信道增益的随机变量。由于信道增益可以任意小，因此对于任意一个速率，误码率总是大于0，因此认为此时的<strong><font color="#F33B45">香农信道容量为0</font></strong>。由此也就引出了中断容量。<br>
+这里先不提中断容量，要想获得最佳功率约束下的信道容量，我们需要求得中断门限$\gamma_0$，将之前的功率约束不等式变为等式，可以化为下面的形式：<br>
+$$\int_0^\infty \frac{P(\gamma)}{\overline{P}}p(\gamma)\mathrm{d}\gamma=1$$<br>
+将求得的最佳功率约束代入，得：<br>
+$$\int_{\gamma_0}^\infty (\frac{1}{\gamma_0}-\frac{1}{\gamma})p(\gamma)\mathrm{d}\gamma=1$$<br>
+$\gamma_0$需要满足该等式，由此即可求得$\gamma_0$。<br>
+但是由于由该式无法求得$\gamma_0$的闭式解，我又不会在matlab中求解积分方程，所以只好使用了最笨的手动调试法挨个试出满足条件的$\gamma_0$，这也是老师上课说的方法。😂</p>
+<h3 id="strong-中断容量-strong"><strong>中断容量</strong></h3>
+<p>这里仅限第3种情况才考虑中断容量，引出两种次优的传输方式：零中断容量与信道反转、中断容量与截断式信道反转。<br>
+<strong>零中断容量与信道反转(Zero-Outage Capacity and Channel Inversion)</strong><br>
+它依靠发送端已知的CSI使得接收端保持恒定接收功率，这种功率分配方式称为<strong><font color="#F33B45">信道反转</font></strong>。信道反转后衰落信道的容量就是信噪比为$\sigma$的AWGN信道容量：<br>
+$$C=B\log_2 (1+\sigma)=B\log_2(1+\frac{1}{\boldsymbol{E}(1/\gamma)})$$<br>
+其优点是可以不用考虑信道的状态而以固定速率进行传输。由于在所有信道状态下传输速率不变，传输过程不会发生中断，所以上式的容量又叫做<strong><font color="#F33B45">零中断容量</font></strong>。但是由于在深衰落信道，如瑞利信道，$\boldsymbol{E}(1/\gamma)=\infty$，其零中断容量为0，故而提出中断容量。<br>
+<strong>中断容量与截断式信道反转(Outage Capacity and Truncated Channel Inversion)</strong><br>
+衰落信道的零中断容量显著低于香农容量的原因在于它要在所有衰落状态下维持恒定的传输速率。如果在特别差的信道状态下停止发送数据，就可以提高非中断状态下的传输速率，从而显著提高容量。中断容量定义为非中断的概率和非中断状态下可维持的最大传输速率的乘积，可通过截断式信道反转的功控方式实现：<br>
+$$\frac{P(\gamma)}{\overline{P}}=\begin{cases} \sigma/\gamma &amp; \gamma\ge\gamma_0\\0 &amp; \gamma&lt;\gamma_0\end{cases}$$</p>
+<p>其中 $\sigma=1/\boldsymbol{E}_{\gamma_0}[1/\gamma]$ ，信道只在$\gamma\ge\gamma_0$时补偿衰落。而：</p>
+<p>$$E_{\gamma_0}[1/\gamma]=\int_{\gamma_0}^\infty \frac{1}{\gamma}p(\gamma)\mathrm{d}\gamma$$</p>
+<p>则中断容量定义如下：</p>
+<p>$$C(P_{out})=B\log_2 (1+\frac{1}{\boldsymbol{E}_{\gamma_0}[1/\gamma]})p(\gamma\ge\gamma_0)$$</p>
+<p>通过调整$\gamma_0$还可以得到最大中断容量：<br>
+$$C=\max_{\gamma_0} B\log_2 (1+\frac{1}{\boldsymbol{E}_{\gamma_0}[1/\gamma]})p(\gamma\ge\gamma_0)$$<br>
+作为次优的传输方式，它的信道容量小于香农容量，但是其优势是简单可实现，复杂度也小于注水法。</p>
+<h3 id="strong-衰落模型-strong"><strong>衰落模型</strong></h3>
+<p>这里涉及三种衰落模型：对数正态衰落、瑞利衰落和Nakagami衰落。<br>
+<strong>对数正态衰落(Log-Normal Shadowing)</strong><br>
+这是阴影衰落中的一个模型，阴影衰落是啥在此不作解释，只提供公式。对数正态阴影模型把发射和接收功率的比值$\psi=P_t/P_r$假设为一个对数正态分布的随机变量，即：</p>
+<p>$$p(\psi)=\frac{\xi}{\sqrt{2\pi}\sigma_{\psi_{dB}}\psi} exp[-\frac{(10\log_{10}\psi-\mu_{\psi_{dB}})^2} {2\sigma_{\psi_{dB}}^2}]$$</p>
+<p>其中$\xi=10/\ln10$，$\mu_{\psi_{dB}}$是以bB为单位的$\psi_{dB}=10\log_10(\psi)$的均值，$\sigma_{\psi_{dB}}$是$\psi_{dB}$的标准差（单位也是dB）。线性平均$\mu_{\psi}$与对数平均$\sigma_{\psi_{dB}}$的关系如下：</p>
+<p>$$10\log_10 \mu_{\psi}=mu_{\psi_{dB}}+\frac{\sigma_{\psi_{dB}}^2}{2\xi}$$</p>
+<p>由于功率比值$\psi$满足对数正态分布，所以接收功率和接收信噪比也满足对数正态分布，因为它们只是常数与$\psi$的乘积，这点在Goldsmith书中page-49有说明。所以只要将上述公式中的功率变量换成对应的信噪比变量即可直接作为接收信噪比$\gamma$的概率密度函数$p(\gamma)$使用。这里需要注意，Goldsmith书中关于对数正态衰落的曲线图是按照对数平均信噪比绘制的，而不是按照线性平均信噪比绘制的，所以对于相同情况下的AWGN信道容量，其信噪比要做出修正。<br>
+<strong>瑞利衰落(Rayleigh Fading)</strong><br>
+在瑞利衰落模型中，信号的包络$z$满足瑞利分布：</p>
+<p>$$p_Z(z)=\frac{2z}{\overline{P_r}} exp[- \frac {z^2} {\overline{P_r}} ] = \frac {z} {\sigma^2} exp [- \frac {z^2} {2\sigma^2} ], z\ge0$$</p>
+<p>其中$\overline{P_r}$为平均接收功率。<br>
+但是！我们需要的是<strong><font color="#F33B45">接收信噪比的概率密度函数</font></strong>，而上面的是包络的概率密度函数，所以我们需要的其实是功率的概率密度函数，其实只需要将包络平方一下捣鼓一下就好了：</p>
+<p>$$p_{Z^2}(x) = \frac {1} {\overline{P_r}} exp(-x/\overline{P_r}) = \frac {1} {2\sigma^2} exp(-x/2\sigma^2), x\ge0$$</p>
+<p>因为接收信噪比 $\gamma=P_r/N_0B$ ，而我们需要根据平均信噪比 $\overline{\gamma}=\overline{P_r}/N_0B$ 绘图，只需要将其对应替换即可得到：</p>
+<p>$$p(\gamma) = \frac {1} {10^{\overline{\gamma}/10}} exp[- \frac {\gamma} {10^{\overline{\gamma}/10}} ]$$</p>
+<p>直接用就完事了！<br>
+<strong>nakagami衰落</strong><br>
+因为这家伙的概率密度函数挺复杂的，我就不全部写一遍了，直接给出：</p>
+<p>$$p(\gamma) = ( \frac {m} {10^{\overline{\gamma}/10}} )^m \frac {\gamma^{m-1}} {\Gamma(m)} exp[- \frac {m\gamma} {10^{\overline{\gamma}/10}} ]$$</p>
+<p>$m=2$为本实验情况，$m=1$时为瑞利衰落，$m=\infty$时无衰落。详情参照Goldsmith书page-79。</p>
+<p>参考文献：<br>
+1.<a href="https://www.zhihu.com/question/55771024" target="_blank" rel="noopener">中断信道容量和各态历经信道容量的意义与区别？</a><br>
+2.<a href="http://www.txrjy.com/thread-1070454-1-1.html" target="_blank" rel="noopener">香农理论获得突破！</a><br>
+3.<a href="https://wenku.baidu.com/view/b0d5ae4dcf84b9d528ea7ad6.html" target="_blank" rel="noopener">容量简介</a><br>
+4.<a href="https://wenku.baidu.com/view/007046785acfa1c7aa00cc40.html" target="_blank" rel="noopener">无线信道的信道容量</a><br>
+5.《Wireless Communication》——A.Goldsmith.</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_4.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>没有更新的文章</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_3.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2020/03/03/ofdm/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>OFDM</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+<div class="comment"><div id="comments"></div></div>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">A Useless Space.</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
+  </div>
+</footer>
+
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/avatar_2.jpg" alt="Lin H"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Lin H</p>
+          <span class="tagline">无趣的灵魂。</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://weibo.com/3960042925/" target="_blank">Weibo</a></li>
+        <li> <a href="https://space.bilibili.com/2684353" target="_blank">bilibili</a></li>
+        <li> <a href="https://huaban.com/l3dviccrcpp/" target="_blank">花瓣</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="//unpkg.com/valine"></script>
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'cA3CuzHaoC6y8uv1dvxI3d2y-gzGzoHsz',
+    appKey: 'rDjmnJugKz9cQOMC7A0jaP8N',
+    placeholder: '此处留言',
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+  TeX: {
+          extensions: ["mhchem.js"]
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.5/latest.js?config=TeX-MML-AM_SVG"></script>
+
+
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+    <script type="text/javascript" src="/js/fireworks.js"></script>
+
+</body>
+</html>
