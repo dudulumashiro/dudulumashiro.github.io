@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
   <title>我的HEXO搭建过程 | A Useless Space.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Lin H">
@@ -12,7 +13,7 @@
   var CONFIG = {
     root: '/',
     theme: 'lx',
-    version: '0.0.0',
+    version: '0.3.8',
     localsearch:{
       "enable": false,
       "trigger": "auto",
@@ -25,9 +26,28 @@
 </script>
 
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/jquery.jside.menu.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.8-fixed/source/css/main.min.css">
+  <style type="text/css">
+    pre,
+    code {
+      font-family: 'Fira Code', monospace;
+    }
+    html {
+      font-family: sans-serif;
+    }
+    body {
+      font-family: sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, figure {
+      font-family: sans-serif;
+    }
+    .menu-container{
+      font-family: sans-serif;
+    }
+  </style>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.jside.menu.js"></script>
 	<script>
 	$(document).ready(function(){
 	$(".menu-container").jSideMenu({
@@ -47,11 +67,12 @@
     s.parentNode.insertBefore(hm, s);
   })();
 </script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
 <meta name="generator" content="Hexo 4.2.0"></head>
 <body>
 <div class="single">
+
 <div id="page">
 <div id="lx-aside" style="background-image: url(/images/page-cover_3.jpg)" data-stellar-background-ratio="0.5">
   <div class="overlay">
@@ -61,10 +82,13 @@
     <h2>我的HEXO搭建过程</h2>
     <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/hexo/" rel="tag">hexo</a></div>
     <div class="social-links">
-<a href="https://github.com/dudulumashiro" target="_blank"><i class="fa fa-github fa-fw"></i></a><a href="mailto:bismarck@mail.xjtu.edu.cn"><i class="fa fa-envelope fa-fw"></i></a><a href="https://weibo.com/3960042925/" target="_blank"><i class="fa fa-weibo fa-fw"></i></a>
+    <a href="https://github.com/dudulumashiro" target="_blank"><i class="fa fa-github fa-fw"></i></a>
+    <a href="mailto:bismarck@mail.xjtu.edu.cn" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+    <a href="https://weibo.com/3960042925/" target="_blank"><i class="fa fa-weibo fa-fw"></i></a>
 </div></div>
 </div>
 </div>
+
 <div id="lx-main-content">
   <div class="lx-post">
     <div class="lx-entry padding">
@@ -150,12 +174,17 @@
 <p>由于markdown转html时存在的一些问题，在用mathjax编写分段函数时的公式内换行本为&quot;\&quot;，但这里需要改为&quot;\\“换行。<br>
 在写长方程的时候请一定多按空格，尤其是在使用”\frac&quot;描述分式的时候，编译非常容易爆炸。</p>
 <h3 id="7-如何在华为云解析个人域名">7.如何在华为云解析个人域名</h3>
+<div class="note info">
+            <p>华为云解析域名：<a href="https://www.genmcai.com/2019/08/03/hexo_DomainName/" target="_blank" rel="noopener">https://www.genmcai.com/2019/08/03/hexo_DomainName/</a></p>
+          </div>
+<p>可能需要一段时间才能解析完成，进入github仓库中的setting查看你的页面是否解析成功。</p>
 <h3 id="8-如何启用Valine评论系统">8.如何启用Valine评论系统</h3>
 <div class="note info">
             <p>Valine：<a href="https://laytonsun.com/learning/2019-08/enable-comments.html" target="_blank" rel="noopener">https://laytonsun.com/learning/2019-08/enable-comments.html</a></p>
           </div>
 <p>点击评论框的左下角可以看到如何在评论中加入一些高级的效果。</p>
 <h3 id="9-如何启用百度统计">9.如何启用百度统计</h3>
+<p>目前SEO还没成功，晚点再弄。</p>
 <h3 id="10-如何在lx主题下实现文章置顶">10.如何在lx主题下实现文章置顶</h3>
 <p>原本在网上找了大量的教程，但是好像都是基于next主题建立的，所以在我用的这个主题下失效了，于是研究了一下发现作者自己写了一个文件，其与hexo默认的配置文件同时对主页文章的排序生效。所以可以通过如下方法实现在lx主题下的文章置顶。<br>
 首先，将博客文件夹（不是主题文件夹）下的<font color="red">node_modules/hexo-generator-index/lib/generator.js</font>中的代码改成：</p>
@@ -210,11 +239,14 @@
   Copyright &copy; 2019.<a href="/">A Useless Space.</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
   </div>
 </footer>
-
 </div>
 
-<button class="menu-trigger"></button>
-<div class="menu">
+<button class="hamburger hamburger--arrow-r" type="button">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+</button> 
+<div class="menu visibility">
   <div class="menu-head">
     <span class="layer">
       <div class="col">
@@ -232,16 +264,20 @@
   </div>
   <nav class="menu-container">
   <ul class="menu-items">
-    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
-    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
     <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+      <i class="fa fa-th-list fa-fw"></i>Categories</span>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HEXO/">HEXO</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%AE%E9%A1%B6/">置顶</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E4%BF%A1%E6%8A%80%E6%9C%AF/">通信技术</a></li></ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
         <ul>
-          <li><a href="/guestbook">留言</a></li>
+          <li><a href="/guestbook">Guestbook</a></li>
         </ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-link fa-fw"></i>友链</span>
+      <i class="fa fa-link fa-fw"></i>Friends</span>
         <ul>
           <li> <a href="https://weibo.com/3960042925/" target="_blank">Weibo</a></li>
         <li> <a href="https://space.bilibili.com/2684353" target="_blank">bilibili</a></li>
@@ -255,10 +291,32 @@
 <div class="gototop js-top">
   <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
 </div>
-<script src="/js/jquery.easing.min.js"></script>
-<script src="/js/jquery.waypoints.min.js"></script>
-<script src="/js/jquery.stellar.min.js"></script>
-<script src="/js/main.js"></script>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.8/source/js/jquery.easing.min.js"></script>
+<script>
+(function () {
+	"use strict";
+	var goToTop = function() {
+		$(".js-gotop").on("click", function(event){
+			event.preventDefault();
+			$("html, body").animate({
+				scrollTop: $("html").offset().top
+			}, 500, "easeInOutExpo");
+			return false;
+		});
+		$(window).scroll(function(){
+			var $win = $(window);
+			if ($win.scrollTop() > 200) {
+				$(".js-top").addClass("active");
+			} else {
+				$(".js-top").removeClass("active");
+			}
+		});
+	};
+	$(function(){
+		goToTop();
+	});
+}());
+</script>
 
 
 
